@@ -20,7 +20,7 @@ public class NEO4J {
 		   insertion();
 				 
 	}
-	
+	//
 	public static void insertion(){
 		//connexion à la BDD
 		Driver driver = GraphDatabase.driver( "bolt://localhost", AuthTokens.basic("neo4j", "46wjxxpc"), Config.build()
