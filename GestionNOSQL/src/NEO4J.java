@@ -37,14 +37,29 @@ public class NEO4J {
 			InputStream ips=new FileInputStream(fichier); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
+			String ligne;	
+			String chaine="";
+			int inc=0;
+			long startTime = System.currentTimeMillis();
+
 			while ((ligne=br.readLine())!=null){
 				if(ligne.length() != 0){
-					session.run( ligne );
+					 //on recupère ici les 5 relations de creation des tables et relations
+						chaine +=ligne;
+						inc ++;
+						if(inc%5 == 0){
+						session.run( chaine );
+						chaine = "";
+						}
+
 				}
 			}
-			br.close(); 
+			long endTime = System.currentTimeMillis();
+			br.close();
 			System.out.println("Insertion effectuée");
+		    System.out.println("Temps total d'executiion de l'insertion :"+ (endTime-startTime) +"ms");
+ 
+			
 		}		
 		catch (Exception e){
 			System.out.println(e.toString());
